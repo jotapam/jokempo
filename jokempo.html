@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script>
+      var guesses = { }
+
+      function playerName(playerId) {
+        return document.getElementById(playerId).value;
+      }
+
+      function reset() {
+        guesses = {}
+      }
+
+      function player1Wins() {
+        alert(`${playerName('player1')}: ${guesses.player1}, ${playerName('player2')}: ${guesses.player2}, ${playerName('player1')} venceu!`);
+        reset();
+      }
+
+      function player2Wins() {
+        alert(`${playerName('player1')}: ${guesses.player1}, ${playerName('player2')}: ${guesses.player2}, ${playerName('player2')} venceu!`);
+        reset();
+      }
+
+      function play(playerId, guess) {
+        guesses[playerId] = guess;
+
+        if (guesses.player1 && guesses.player2) {
+          if (guesses.player1 == guesses.player2) {
+            alert(`Empate: os dois jogaram ${guess}`)
+            reset();
+          } else if (guesses.player1 == 'pedra') {
+            if (guesses.player2 == 'papel') {
+              player2Wins();
+            }
+            else {
+              player1Wins();
+            }
+          } else if (guesses.player1 == 'tesoura') {
+            if (guesses.player2 == 'papel') {
+              player1Wins();
+            }
+            else if (guesses.player2 == 'pedra') {
+              player2Wins();
+            }
+          } else if (guesses.player1 == 'papel') {
+            if (guesses.player2 == 'pedra') {
+              player1Wins();
+            }
+            else if (guesses.player2 == 'tesoura') {
+              player2Wins();
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <p>
+      <label for="player1">Player 1</label>
+      <input id="player1" />
+      <button onclick="play('player1', 'pedra')">Pedra</button>
+      <button onclick="play('player1', 'papel')">Papel</button>
+      <button onclick="play('player1', 'tesoura')">Tesoura</button>
+    </p>
+    <p>
+      <label for="player2">Player 2</label>
+      <input id="player2" />
+      <button onclick="play('player2', 'pedra')">Pedra</button>
+      <button onclick="play('player2', 'papel')">Papel</button>
+      <button onclick="play('player2', 'tesoura')">Tesoura</button>
+    </p>
+  </body>
+  <footer>
+
+  </footer>
+</html>
